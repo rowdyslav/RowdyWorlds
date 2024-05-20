@@ -1,0 +1,14 @@
+name: RowdyWorlds
+api: .
+version: '${project.version}'
+main: org.rowdyslav.rowdyworlds.RowdyWorlds
+api-version: '1.20'
+depend: [WorldGuard]
+permissions:
+  rowdyworlds.use:
+    description: "Использование /world"
+    default: true
+commands:
+  island:
+    description: "Отправиться в свой мир"
+    aliases: [world]
