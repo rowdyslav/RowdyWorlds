@@ -39,18 +39,19 @@ public final class RowdyWorlds extends JavaPlugin {
         World world = Bukkit.getWorld(worldName);
 
         if (world == null) {
-            world = Bukkit.createWorld(WorldCreator.name(worldName));
-            assert world != null;
-            world.setSpawnLocation(0, 64, 0);
+            World new_world = Bukkit.createWorld(WorldCreator.name(worldName));
+            assert new_world != null;
+            new_world.setSpawnLocation(0, 64, 0);
 
             if (isWorldGuardInstalled()) {
                 RegionManager regions = WorldGuard.getInstance().getPlatform().getRegionContainer()
-                        .get(BukkitAdapter.adapt(world));
+                        .get(BukkitAdapter.adapt(new_world));
                 assert regions != null;
                 GlobalProtectedRegion globalRegion = new GlobalProtectedRegion("__global__");
                 regions.addRegion(globalRegion);
                 Objects.requireNonNull(regions.getRegion("__global__")).getOwners().addPlayer(player.getName());
             }
+            return new_world;
         }
 
         return world;
